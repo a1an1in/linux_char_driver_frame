@@ -23,7 +23,11 @@
 #include <linux/io.h>		/* readb/writeb */
 #include <linux/uaccess.h>
 #include <linux/platform_device.h>
-#include <linux/libproto_analyzer/pdt_drv_proto_analyzer.h>
+
+#include <liballoc/test_allocator.h>
+/*
+ *#include <libproto_analyzer/pdt_drv_proto_analyzer.h>
+ */
 
 #define DEF_MAJOR 	90
 
@@ -92,7 +96,6 @@ device_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
 static ssize_t
 device_write(struct file *filp, const char __user *buf, size_t count, loff_t *f_pos)
 {
-	driver_test();
 	return 0;
 }
 
@@ -173,8 +176,11 @@ plat_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, pdev_priv);
 
 
+	test_allocator();
 
-	pdt_drv_proto_analyzer();
+	/*
+	 *pdt_drv_proto_analyzer();
+	 */
 
 	return 0;
 err2:

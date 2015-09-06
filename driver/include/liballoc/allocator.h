@@ -38,4 +38,5 @@ void allocator_mem_free(allocator_t * alloc,void *addr);
 void allocator_destroy(allocator_t * alloc);
 void allocator_ctr_init(allocator_t * alloc, uint32_t slab_array_max_num, uint32_t data_min_size, uint32_t mempool_capacity);
 void allocator_mem_info(allocator_t * alloc);
+
 #endif

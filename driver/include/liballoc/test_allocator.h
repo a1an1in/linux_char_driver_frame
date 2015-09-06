@@ -1,12 +1,12 @@
 /*
  * =====================================================================================
  *
- *       Filename:  inc_files.h
+ *       Filename:  test_allocator.h
  *
  *    Description:  
  *
  *        Version:  1.0
- *        Created:  08/13/2015 06:11:34 PM
+ *        Created:  09/06/2015 04:22:47 PM
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -15,8 +15,5 @@
  *
  * =====================================================================================
  */
-#include "liballoc/allocator.h"
-#include "liballoc/allocator_ctr_alloc.h"
-#include "liballoc/allocator_ctr_slab_list.h"
-#include "liballoc/allocator_ctr_mempool_list.h"
-#include "liballoc/allocator_sys_alloc.h"
+
+void test_allocator();
