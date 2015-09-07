@@ -24,10 +24,10 @@
 #include <linux/uaccess.h>
 #include <linux/platform_device.h>
 
+#include <libdbg/debug.h>
 #include <liballoc/test_allocator.h>
-/*
- *#include <libproto_analyzer/pdt_drv_proto_analyzer.h>
- */
+#include <liballoc/liballoc_register_modules.h>
+#include <libproto_analyzer/pdt_drv_proto_analyzer.h>
 
 #define DEF_MAJOR 	90
 
@@ -121,6 +121,7 @@ plat_probe(struct platform_device *pdev)
 	int ret;
 	struct resource *res1, *res2;
 	
+	dbg_str(DBG_DETAIL,"plat_probe");
 	/* get resource from platform_device */
 	res1 = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	res2 = platform_get_resource(pdev, IORESOURCE_IRQ, 0);
@@ -138,13 +139,15 @@ plat_probe(struct platform_device *pdev)
 		pdev_priv->irq = res2->start;
 
 	/* ioremap */
-	pdev_priv->vir_base = ioremap(pdev_priv->phy_base, pdev_priv->phy_size);
-	if (NULL == pdev_priv->vir_base) {
-		printk("cannot ioremap: 0x%lx\n", pdev_priv->phy_base);
-		ret = -EIO;
-		goto err;
-	}
-	printk("ioremap 0x%lx to 0x%p\n", pdev_priv->phy_base, pdev_priv->vir_base);
+	/*
+	 *pdev_priv->vir_base = ioremap(pdev_priv->phy_base, pdev_priv->phy_size);
+	 *if (NULL == pdev_priv->vir_base) {
+	 *    printk("cannot ioremap: 0x%lx\n", pdev_priv->phy_base);
+	 *    ret = -EIO;
+	 *    goto err;
+	 *}
+	 *printk("ioremap 0x%lx to 0x%p\n", pdev_priv->phy_base, pdev_priv->vir_base);
+	 */
 
 	/* register cdev */
 	if (pdev->id == -1)
@@ -161,11 +164,14 @@ plat_probe(struct platform_device *pdev)
 		return PTR_ERR(pdev_priv->class);
 
 	/* create device file */
-	pdev_priv->class_dev = device_create(pdev_priv->class, /* class */
-		&pdev->dev,	/* parent */
-		pdev_priv->dev_id,	/* dev_t */
-		NULL,		/* drvdata */
-		"hpi_driver-%d", MINOR(pdev_priv->dev_id)); /* name */
+	/*
+	 *pdev_priv->class_dev = device_create(pdev_priv->class, [> class <]
+	 *    &pdev->dev,	[> parent <]
+	 *    pdev_priv->dev_id,	[> dev_t <]
+	 *    NULL,		[> drvdata <]
+	 *    "hpi_driver-%d", MINOR(pdev_priv->dev_id)); [> name <]
+	 */
+	pdev_priv->class_dev = class_device_create(pdev_priv->class,NULL,&pdev->dev,NULL,"hpi_driver");
 
 	if (IS_ERR(pdev_priv->class_dev)) {
 		ret = PTR_ERR(pdev_priv->class_dev);
@@ -176,16 +182,22 @@ plat_probe(struct platform_device *pdev)
 	platform_set_drvdata(pdev, pdev_priv);
 
 
-	test_allocator();
+	dbg_str(DBG_DETAIL,"my test begin");
 
+	liballoc_register_modules();
 	/*
-	 *pdt_drv_proto_analyzer();
+	 *test_allocator();
 	 */
+
+	pdt_drv_proto_analyzer();
 
 	return 0;
 err2:
+	dbg_str(DBG_DETAIL,"run at here");
 	cdev_del(&pdev_priv->cdev);
-	iounmap(pdev_priv->vir_base);
+	/*
+	 *iounmap(pdev_priv->vir_base);
+	 */
 err:
 	kfree(pdev_priv);
 	return ret;

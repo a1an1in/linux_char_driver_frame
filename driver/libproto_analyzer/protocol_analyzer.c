@@ -45,14 +45,16 @@
 /*
  *#include <math.h>
  */
-#include <linux/string.h>
+/*
+ *#include <linux/string.h>
+ */
 #include "libdbg/debug.h"
 #include "libproto_analyzer/protocol_analyzer.h"
 
-static double pow(double x,double y)
+static int pow(int x,int y)
 {
 
-	double pow_value = 1;
+	int pow_value = 1;
 	int i;
 	
 	for(i = 0;i <= y; i++)

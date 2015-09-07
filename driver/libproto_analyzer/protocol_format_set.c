@@ -85,14 +85,12 @@ int atoi(const char *str)
 	if(!p)  
 		return -1;  
 
-	if((*p < '0' || *p > '9')&&(*p == '+' || *p == '-'))  
-	{  
+	if((*p < '0' || *p > '9')&&(*p == '+' || *p == '-'))  {  
 		if(*p == '-')  
 			minus_flag = 1;  
 		p++;  
 	}  
-	while( *p != '\0')  
-	{  
+	while( *p != '\0')  {  
 		if(*p < '0' || *p > '9'){
 			return -1;  
 			break;  
@@ -404,6 +402,7 @@ pfs_set_proto_info(
 	if(info_list == NULL){
 		return NULL;
 	}
+	memset(info_list,0,sizeof(proto_info_list_t));
 	set_proto_info_attribs(name, name_value,info_list);
 	set_proto_info_attribs(byte_pos, byte_pos_value,info_list);
 	set_proto_info_attribs(bit_pos, bit_pos_value,info_list);

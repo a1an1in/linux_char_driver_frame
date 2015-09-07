@@ -53,6 +53,7 @@ void test_allocator()
 	uint32_t size = 8;
 	int i;
 
+	dbg_str(DBG_DETAIL,"run at here");
 	allocator = allocator_creator(ALLOCATOR_TYPE_SYS_MALLOC,0);
 	/*
 	 *allocator_ctr_init(allocator, 0, 0, 1024);
@@ -61,6 +62,7 @@ void test_allocator()
 	 *allocator_cds_init(allocator,0,0,0);
 	 */
 
+	dbg_str(DBG_DETAIL,"run at here");
 	p = allocator_mem_alloc(allocator,7);
 	dbg_str(DBG_CONTAINER_DETAIL,"_________alloc addr:%p",p);
 

@@ -26,10 +26,14 @@
  * 
  */
 #include <linux/mm.h>
+#include <libdbg/debug.h>
 #include "liballoc/inc_files.h"
 
 void *sys_alloc_alloc(allocator_t *alloc,uint32_t size)
 {
+	/*
+	 *dbg_str(DBG_DETAIL,"sys_alloc");
+	 */
 	return kmalloc(size,GFP_KERNEL);
 }
 void sys_alloc_free(allocator_t *alloc,void *addr)

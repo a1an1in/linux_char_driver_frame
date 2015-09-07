@@ -39,31 +39,22 @@ DBG_VIP	include/libdbg/debug.h	66;"	d
 DBG_WARNNING	include/libdbg/debug.h	63;"	d
 DC_DATA	libproto_analyzer/test/pdt_drv_proto_format.h	16;"	d
 DC_INFO	libproto_analyzer/test/pdt_drv_proto_format.h	15;"	d
-DEF_MAJOR	plat_driver.c	27;"	d	file:
+DEF_MAJOR	plat_driver.c	32;"	d	file:
 ERRORIP	include/libdbg/debug.h	31;"	d
 FTC	include/libdbg/debug.h	51;"	d
 GREEN	include/libdbg/debug.h	38;"	d
 HIGHLIGHT_FLAG	include/libdbg/debug.h	47;"	d
-HLIST_HEAD	include/liballoc/list.h	632;"	d
-HLIST_HEAD_INIT	include/liballoc/list.h	631;"	d
-INIT_HLIST_HEAD	include/liballoc/list.h	633;"	d
-INIT_HLIST_NODE	include/liballoc/list.h	/^static inline void INIT_HLIST_NODE(struct hlist_node *h)$/;"	f
-INIT_LIST_HEAD	include/liballoc/list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
 INIT_LIST_HEAD	include/libproto_analyzer/list.h	/^static inline void INIT_LIST_HEAD(struct list_head *list)$/;"	f
-KERNEL	Makefile	/^KERNEL := \/lib\/modules\/`uname -r`\/build\/$/;"	m
+KERNEL	Makefile	/^KERNEL := \/root\/workspace\/LINUX\/linux-2.6.19_good$/;"	m
 LAB	libproto_analyzer/test/pdt_drv_proto_format.h	5;"	d
 LD	libproto_analyzer/Makefile	/^LD = ld$/;"	m
 LD	libproto_analyzer/test/Makefile	/^LD = ld$/;"	m
 LEN	libproto_analyzer/test/pdt_drv_proto_format.h	6;"	d
 LINUX_KERNEL_MODE	include/libcre/libcre.h	24;"	d
 LINUX_KERNEL_MUTEX_LOCK	include/libcre/sync_lock/sync_lock.h	/^	LINUX_KERNEL_MUTEX_LOCK,$/;"	e	enum:sync_lock_type
-LIST_HEAD	include/liballoc/list.h	43;"	d
 LIST_HEAD	include/libproto_analyzer/list.h	48;"	d
-LIST_HEAD_INIT	include/liballoc/list.h	41;"	d
 LIST_HEAD_INIT	include/libproto_analyzer/list.h	46;"	d
-LIST_POISON1	include/liballoc/list.h	24;"	d
 LIST_POISON1	include/libproto_analyzer/list.h	29;"	d
-LIST_POISON2	include/liballoc/list.h	25;"	d
 LIST_POISON2	include/libproto_analyzer/list.h	30;"	d
 LV_CORRECT	include/libdbg/debug.h	/^	LV_CORRECT,$/;"	e	enum:__anon3
 LV_DETAIL	include/libdbg/debug.h	/^	LV_DETAIL$/;"	e	enum:__anon3
@@ -85,10 +76,10 @@ MAX_NAME_LEN	include/libproto_analyzer/protocol_format_set.h	48;"	d
 MAX_NAME_LEN	include/libproto_analyzer/protocol_format_set.h	53;"	d
 MAX_NAME_LEN	include/libproto_analyzer/protocol_format_set.h	60;"	d
 MAX_PROTOCOL_NUM	libproto_analyzer/protocol_format_set.c	370;"	d	file:
-MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	117;"	d	file:
-MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	120;"	d	file:
-MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	77;"	d	file:
-MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	79;"	d	file:
+MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/pdt_drv_proto_analyzer.c	117;"	d	file:
+MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/pdt_drv_proto_analyzer.c	120;"	d	file:
+MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/pdt_drv_proto_analyzer.c	77;"	d	file:
+MAX_PROTO_BUFFER_LEN	libproto_analyzer/test/pdt_drv_proto_analyzer.c	79;"	d	file:
 MAX_PROTO_DATA_LEN	include/libproto_analyzer/protocol_analyzer.h	23;"	d
 MAX_PROTO_DATA_LEN	include/libproto_analyzer/protocol_analyzer.h	8;"	d
 MEM_POOL_MAX_SIZE	include/liballoc/allocator_ctr_alloc.h	31;"	d
@@ -143,14 +134,12 @@ TARGET	libproto_analyzer/test/Makefile	/^TARGET = build_in.o$/;"	m
 WHITE	include/libdbg/debug.h	43;"	d
 WINDOWS_MUTEX_LOCK	include/libcre/sync_lock/sync_lock.h	/^	WINDOWS_MUTEX_LOCK,$/;"	e	enum:sync_lock_type
 YELLOW	include/libdbg/debug.h	39;"	d
-_LINUX_LIST_H	include/liballoc/list.h	2;"	d
 _LINUX_LIST_H	include/libproto_analyzer/list.h	2;"	d
 __ALLOCATOR_CDS_MEMPOOL_LIST_H__	include/liballoc/allocator_ctr_mempool_list.h	19;"	d
 __ALLOCATOR_CDS_SLAB_LIST_H__	include/liballoc/allocator_ctr_slab_list.h	19;"	d
 __ALLOCATOR_H__	include/liballoc/allocator.h	2;"	d
 __ALLOCATOR_SGI_ALLOC_H__	include/liballoc/allocator_ctr_alloc.h	19;"	d
 __ALLOCATOR_SYSALLOC_H__	include/liballoc/allocator_sys_alloc.h	2;"	d
-__BASIC_TYPES_H__	include/liballoc/basic_types.h	2;"	d
 __BASIC_TYPES_H__	include/libcre/basic_types.h	2;"	d
 __BASIC_TYPES_H__	include/libproto_analyzer/my_types.h	2;"	d
 __DEBUG_H__	include/libdbg/debug.h	2;"	d
@@ -160,26 +149,14 @@ __PDT_PROTO_FORMAT__	libproto_analyzer/test/pdt_drv_proto_format.h	2;"	d
 __PROTOCOLO_ANALYZER__	include/libproto_analyzer/protocol_analyzer.h	2;"	d
 __PROTOCOL_FORMAT_SET__	include/libproto_analyzer/protocol_format_set.h	2;"	d
 __SYNC_LOCK_H__	include/libcre/sync_lock/sync_lock.h	19;"	d
-__hlist_del	include/liballoc/list.h	/^static inline void __hlist_del(struct hlist_node *n)$/;"	f
-__list_add	include/liballoc/list.h	/^static inline void __list_add(struct list_head *new,$/;"	f
+__attribute_used__	hpi_driver.mod.c	/^__attribute_used__$/;"	v	file:
 __list_add	include/libproto_analyzer/list.h	/^static inline void __list_add(struct list_head *add,$/;"	f
-__list_add_rcu	include/liballoc/list.h	/^static inline void __list_add_rcu(struct list_head * new,$/;"	f
-__list_del	include/liballoc/list.h	/^static inline void __list_del(struct list_head * prev, struct list_head * next)$/;"	f
 __list_del	include/libproto_analyzer/list.h	/^static inline void __list_del(struct list_head * prev, struct list_head * next)$/;"	f
-__list_for_each	include/liballoc/list.h	406;"	d
 __list_for_each	include/libproto_analyzer/list.h	334;"	d
-__list_for_each_rcu	include/liballoc/list.h	561;"	d
 __list_for_each_rcu	include/libproto_analyzer/list.h	489;"	d
-__list_splice	include/liballoc/list.h	/^static inline void __list_splice(struct list_head *list,$/;"	f
 __list_splice	include/libproto_analyzer/list.h	/^static inline void __list_splice(struct list_head *list,$/;"	f
-__pdt_drv_proto_init_3019	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int __pdt_drv_proto_init_3019(uint16_t proto_id,uint16_t lab,$/;"	f
-__this_module	plat_driver.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
-__used	plat_driver.mod.c	/^__used$/;"	v	file:
-__used	plat_driver.mod.c	/^__used$/;"	v	typeref:struct:____versions	file:
-__used	plat_driver.mod.c	/^static const struct rheldata _rheldata __used$/;"	v	typeref:struct:_rheldata	file:
-_offsetof	include/liballoc/list.h	11;"	d
-_offsetof	include/liballoc/list.h	12;"	d
-_offsetof	include/liballoc/list.h	14;"	d
+__pdt_drv_proto_init_3019	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int __pdt_drv_proto_init_3019(uint16_t proto_id,uint16_t lab,$/;"	f
+__this_module	hpi_driver.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
 _offsetof	include/libproto_analyzer/list.h	13;"	d
 alloc	include/liballoc/allocator.h	/^	void *(*alloc)(allocator_t *alloc,uint32_t size);$/;"	m	struct:allocator_operations
 alloc_ops	include/liballoc/allocator.h	/^	struct allocator_operations *alloc_ops;$/;"	m	struct:allocator	typeref:struct:allocator::allocator_operations
@@ -188,7 +165,7 @@ allocator	include/liballoc/allocator.h	/^typedef struct allocator{$/;"	s
 allocator	include/libproto_analyzer/protocol_analyzer.h	/^	allocator_t *allocator;$/;"	m	struct:protocol_analyzer_s
 allocator	include/libproto_analyzer/protocol_format_set.h	/^	allocator_t *allocator;$/;"	m	struct:proto_head_list_s
 allocator	include/libproto_analyzer/protocol_format_set.h	/^	allocator_t *allocator;$/;"	m	struct:protocol_format_set_s
-allocator	libproto_analyzer/test/test_pdt_pdu_proto_analyzer.c	/^allocator_t *allocator;$/;"	v
+allocator	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^allocator_t *allocator;$/;"	v
 allocator_creator	liballoc/allocator.c	/^allocator_t *allocator_creator(uint8_t allocator_type,uint8_t lock_type)$/;"	f
 allocator_ctr_init	liballoc/allocator.c	/^void allocator_ctr_init(allocator_t * alloc,$/;"	f
 allocator_destroy	liballoc/allocator.c	/^void allocator_destroy(allocator_t * alloc)$/;"	f
@@ -224,12 +201,11 @@ cds_slab_head_list_t	include/liballoc/allocator_ctr_alloc.h	/^}cds_slab_head_lis
 cds_slab_t	include/liballoc/allocator_ctr_alloc.h	/^}cds_slab_t;$/;"	t	typeref:struct:slab
 class	plat_driver.c	/^	struct class *class;$/;"	m	struct:pdev_priv	typeref:struct:pdev_priv::class	file:
 class_dev	plat_driver.c	/^	struct device *class_dev;$/;"	m	struct:pdev_priv	typeref:struct:pdev_priv::device	file:
-container_of	include/liballoc/list.h	18;"	d
 container_of	include/libproto_analyzer/list.h	22;"	d
 copy_protocol_format	include/libproto_analyzer/protocol_analyzer.h	/^	int (*copy_protocol_format)(struct protocol_analyzer_s *pa); $/;"	m	struct:protocol_analyzer_s
 count	include/liballoc/allocator_ctr_alloc.h	/^	uint32_t count;$/;"	m	struct:cds_mem_pool_head_list
 count	include/liballoc/allocator_ctr_alloc.h	/^	uint32_t count;$/;"	m	struct:slab_head_list
-count	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^	int count;$/;"	m	struct:pa_array_s	file:
+count	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^	int count;$/;"	m	struct:pa_array_s	file:
 data	include/liballoc/allocator_ctr_alloc.h	/^	uint8_t data[0];$/;"	m	struct:slab
 data	include/libproto_analyzer/protocol_format_set.h	/^	uint32_t data;$/;"	m	struct:proto_info_list_s
 data_min_size	include/liballoc/allocator_ctr_alloc.h	/^	uint32_t data_min_size;$/;"	m	struct:cds_alloc_s
@@ -253,42 +229,20 @@ driver_module_init	plat_driver.c	/^static int __init driver_module_init(void)$/;
 empty_pool	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head *empty_pool;$/;"	m	struct:cds_alloc_s	typeref:struct:cds_alloc_s::list_head
 find_key	include/libproto_analyzer/protocol_analyzer.h	/^	struct list_head * (*find_key)(char *key); $/;"	m	struct:protocol_analyzer_s	typeref:struct:protocol_analyzer_s::find_key
 find_protocol_format	include/libproto_analyzer/protocol_analyzer.h	/^	int (*find_protocol_format)(struct protocol_analyzer_s *pa);$/;"	m	struct:protocol_analyzer_s
-first	include/liballoc/list.h	/^	struct hlist_node *first;$/;"	m	struct:hlist_head	typeref:struct:hlist_head::hlist_node
 free	include/liballoc/allocator.h	/^	void (*free)(allocator_t *alloc,void *addr);$/;"	m	struct:allocator_operations
 free_mem	include/libproto_analyzer/protocol_format_set.h	/^	free_mem_fptr free_mem;$/;"	m	struct:proto_info_list_s
 free_mem_fptr	include/libproto_analyzer/protocol_format_set.h	/^typedef void (*free_mem_fptr)(void *mem_used);$/;"	t
 free_proto_info_list_mem	libproto_analyzer/protocol_format_set.c	/^void free_proto_info_list_mem(void *mem_used)$/;"	f
 free_slabs	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head **free_slabs;$/;"	m	struct:cds_alloc_s	typeref:struct:cds_alloc_s::list_head
 get_bit_data	libproto_analyzer/protocol_analyzer.c	/^uint8_t get_bit_data(uint32_t data,uint8_t bit_pos,uint8_t len)$/;"	f
-get_cont_pdu_len	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int get_cont_pdu_len(buffer_t *buffer_p,uint16_t os) $/;"	f
-get_cont_pdu_num	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int get_cont_pdu_num(buffer_t *buffer_p) $/;"	f
+get_cont_pdu_len	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int get_cont_pdu_len(buffer_t *buffer_p,uint16_t os) $/;"	f
+get_cont_pdu_num	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int get_cont_pdu_num(buffer_t *buffer_p) $/;"	f
 get_dbg_level	include/libdbg/debug.h	53;"	d
 get_value	include/libproto_analyzer/protocol_analyzer.h	/^	int (*get_value)(char *key,char *value); $/;"	m	struct:protocol_analyzer_s
 head_lock	include/liballoc/allocator_ctr_alloc.h	/^	sync_lock_t head_lock;    $/;"	m	struct:cds_mem_pool_head_list
 head_lock	include/liballoc/allocator_ctr_alloc.h	/^	sync_lock_t head_lock;    $/;"	m	struct:slab_head_list
 hexstr2num	libproto_analyzer/protocol_format_set.c	/^int hexstr2num(const char* const_str)$/;"	f
-hlist_add_after	include/liballoc/list.h	/^static inline void hlist_add_after(struct hlist_node *n,$/;"	f
-hlist_add_after_rcu	include/liballoc/list.h	/^static inline void hlist_add_after_rcu(struct hlist_node *prev,$/;"	f
-hlist_add_before	include/liballoc/list.h	/^static inline void hlist_add_before(struct hlist_node *n,$/;"	f
-hlist_add_before_rcu	include/liballoc/list.h	/^static inline void hlist_add_before_rcu(struct hlist_node *n,$/;"	f
-hlist_add_head	include/liballoc/list.h	/^static inline void hlist_add_head(struct hlist_node *n, struct hlist_head *h)$/;"	f
-hlist_add_head_rcu	include/liballoc/list.h	/^static inline void hlist_add_head_rcu(struct hlist_node *n,$/;"	f
-hlist_del	include/liballoc/list.h	/^static inline void hlist_del(struct hlist_node *n)$/;"	f
-hlist_del_init	include/liballoc/list.h	/^static inline void hlist_del_init(struct hlist_node *n)$/;"	f
-hlist_del_rcu	include/liballoc/list.h	/^static inline void hlist_del_rcu(struct hlist_node *n)$/;"	f
-hlist_empty	include/liballoc/list.h	/^static inline int hlist_empty(const struct hlist_head *h)$/;"	f
-hlist_entry	include/liballoc/list.h	840;"	d
-hlist_for_each	include/liballoc/list.h	842;"	d
-hlist_for_each_entry	include/liballoc/list.h	857;"	d
-hlist_for_each_entry_continue	include/liballoc/list.h	869;"	d
-hlist_for_each_entry_from	include/liballoc/list.h	881;"	d
-hlist_for_each_entry_rcu	include/liballoc/list.h	911;"	d
-hlist_for_each_entry_safe	include/liballoc/list.h	894;"	d
-hlist_for_each_safe	include/liballoc/list.h	846;"	d
-hlist_head	include/liballoc/list.h	/^struct hlist_head {$/;"	s
-hlist_node	include/liballoc/list.h	/^struct hlist_node {$/;"	s
-hlist_replace_rcu	include/liballoc/list.h	/^static inline void hlist_replace_rcu(struct hlist_node *old,$/;"	f
-hlist_unhashed	include/liballoc/list.h	/^static inline int hlist_unhashed(const struct hlist_node *h)$/;"	f
+hpi_driver-objs	Makefile	/^hpi_driver-objs := plat_driver.o$/;"	m
 info	include/liballoc/allocator.h	/^	void (*info)(allocator_t * alloc);$/;"	m	struct:allocator_operations
 init	include/liballoc/allocator.h	/^	int (*init)(allocator_t *alloc);$/;"	m	struct:allocator_operations
 init_proto_format_set	libproto_analyzer/protocol_format_set.c	/^void init_proto_format_set(int proto_base_addr,$/;"	f
@@ -298,80 +252,45 @@ len	include/libproto_analyzer/protocol_format_set.h	/^	uint16_t len;$/;"	m	struc
 len	include/libproto_analyzer/protocol_format_set.h	/^	uint16_t len;\/\/len value$/;"	m	struct:proto_info_list_s
 len_unit	include/libproto_analyzer/protocol_format_set.h	/^	uint8_t len_unit;\/\/len unit$/;"	m	struct:proto_info_list_s
 liballoc_register_modules	liballoc/liballoc_register_modules.c	/^void liballoc_register_modules()$/;"	f
-list_add	include/liballoc/list.h	/^static inline void list_add(struct list_head *new, struct list_head *head)$/;"	f
 list_add	include/libproto_analyzer/list.h	/^static inline void list_add(struct list_head *add, struct list_head *head)$/;"	f
-list_add_rcu	include/liballoc/list.h	/^static inline void list_add_rcu(struct list_head *new, struct list_head *head)$/;"	f
-list_add_tail	include/liballoc/list.h	/^static inline void list_add_tail(struct list_head *new, struct list_head *head)$/;"	f
 list_add_tail	include/libproto_analyzer/list.h	/^static inline void list_add_tail(struct list_head *add, struct list_head *head)$/;"	f
-list_add_tail_rcu	include/liballoc/list.h	/^static inline void list_add_tail_rcu(struct list_head *new,$/;"	f
 list_count	include/libproto_analyzer/protocol_format_set.h	/^	uint8_t list_count;$/;"	m	struct:proto_head_list_s
-list_del	include/liballoc/list.h	/^static inline void list_del(struct list_head *entry)$/;"	f
 list_del	include/libproto_analyzer/list.h	/^static inline void list_del(struct list_head *entry)$/;"	f
-list_del_init	include/liballoc/list.h	/^static inline void list_del_init(struct list_head *entry)$/;"	f
 list_del_init	include/libproto_analyzer/list.h	/^static inline void list_del_init(struct list_head *entry)$/;"	f
-list_del_rcu	include/liballoc/list.h	/^static inline void list_del_rcu(struct list_head *entry)$/;"	f
 list_del_rcu	include/libproto_analyzer/list.h	/^static inline void list_del_rcu(struct list_head *entry)$/;"	f
-list_empty	include/liballoc/list.h	/^static inline int list_empty(const struct list_head *head)$/;"	f
 list_empty	include/libproto_analyzer/list.h	/^static inline int list_empty(const struct list_head *head)$/;"	f
-list_empty_careful	include/liballoc/list.h	/^static inline int list_empty_careful(const struct list_head *head)$/;"	f
 list_empty_careful	include/libproto_analyzer/list.h	/^static inline int list_empty_careful(const struct list_head *head)$/;"	f
-list_entry	include/liballoc/list.h	384;"	d
 list_entry	include/libproto_analyzer/list.h	312;"	d
-list_for_each	include/liballoc/list.h	392;"	d
 list_for_each	include/libproto_analyzer/list.h	320;"	d
-list_for_each_continue_rcu	include/liballoc/list.h	611;"	d
 list_for_each_continue_rcu	include/libproto_analyzer/list.h	539;"	d
-list_for_each_entry	include/liballoc/list.h	434;"	d
 list_for_each_entry	include/libproto_analyzer/list.h	362;"	d
-list_for_each_entry_continue	include/liballoc/list.h	470;"	d
 list_for_each_entry_continue	include/libproto_analyzer/list.h	398;"	d
-list_for_each_entry_from	include/liballoc/list.h	483;"	d
 list_for_each_entry_from	include/libproto_analyzer/list.h	411;"	d
-list_for_each_entry_rcu	include/liballoc/list.h	593;"	d
 list_for_each_entry_rcu	include/libproto_analyzer/list.h	521;"	d
-list_for_each_entry_reverse	include/liballoc/list.h	445;"	d
 list_for_each_entry_reverse	include/libproto_analyzer/list.h	373;"	d
-list_for_each_entry_safe	include/liballoc/list.h	494;"	d
 list_for_each_entry_safe	include/libproto_analyzer/list.h	422;"	d
-list_for_each_entry_safe_continue	include/liballoc/list.h	510;"	d
 list_for_each_entry_safe_continue	include/libproto_analyzer/list.h	438;"	d
-list_for_each_entry_safe_from	include/liballoc/list.h	526;"	d
 list_for_each_entry_safe_from	include/libproto_analyzer/list.h	454;"	d
-list_for_each_entry_safe_reverse	include/liballoc/list.h	541;"	d
 list_for_each_entry_safe_reverse	include/libproto_analyzer/list.h	469;"	d
-list_for_each_prev	include/liballoc/list.h	414;"	d
 list_for_each_prev	include/libproto_analyzer/list.h	342;"	d
-list_for_each_rcu	include/liballoc/list.h	556;"	d
 list_for_each_rcu	include/libproto_analyzer/list.h	484;"	d
-list_for_each_safe	include/liballoc/list.h	424;"	d
 list_for_each_safe	include/libproto_analyzer/list.h	352;"	d
-list_for_each_safe_rcu	include/liballoc/list.h	578;"	d
 list_for_each_safe_rcu	include/libproto_analyzer/list.h	506;"	d
 list_head	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head list_head;$/;"	m	struct:cds_mem_pool	typeref:struct:cds_mem_pool::list_head
 list_head	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head list_head;$/;"	m	struct:cds_mem_pool_head_list	typeref:struct:cds_mem_pool_head_list::list_head
 list_head	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head list_head;$/;"	m	struct:slab	typeref:struct:slab::list_head
 list_head	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head list_head;$/;"	m	struct:slab_head_list	typeref:struct:slab_head_list::list_head
-list_head	include/liballoc/list.h	/^struct list_head {$/;"	s
 list_head	include/libproto_analyzer/list.h	/^struct list_head {$/;"	s
 list_head	include/libproto_analyzer/protocol_format_set.h	/^	struct list_head list_head;$/;"	m	struct:proto_head_list_s	typeref:struct:proto_head_list_s::list_head
 list_head	include/libproto_analyzer/protocol_format_set.h	/^	struct list_head list_head;$/;"	m	struct:proto_info_list_s	typeref:struct:proto_info_list_s::list_head
 list_head_p2	include/libproto_analyzer/protocol_format_set.h	/^	struct list_head **list_head_p2;$/;"	m	struct:protocol_format_set_s	typeref:struct:protocol_format_set_s::list_head
-list_is_last	include/liballoc/list.h	/^static inline int list_is_last(const struct list_head *list,$/;"	f
 list_is_last	include/libproto_analyzer/list.h	/^static inline int list_is_last(const struct list_head *list,$/;"	f
-list_move	include/liballoc/list.h	/^static inline void list_move(struct list_head *list, struct list_head *head)$/;"	f
 list_move	include/libproto_analyzer/list.h	/^static inline void list_move(struct list_head *list, struct list_head *head)$/;"	f
-list_move_tail	include/liballoc/list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	f
 list_move_tail	include/libproto_analyzer/list.h	/^static inline void list_move_tail(struct list_head *list,$/;"	f
-list_prepare_entry	include/liballoc/list.h	458;"	d
 list_prepare_entry	include/libproto_analyzer/list.h	386;"	d
-list_replace	include/liballoc/list.h	/^static inline void list_replace(struct list_head *old,$/;"	f
 list_replace	include/libproto_analyzer/list.h	/^static inline void list_replace(struct list_head *old,$/;"	f
-list_replace_init	include/liballoc/list.h	/^static inline void list_replace_init(struct list_head *old,$/;"	f
 list_replace_init	include/libproto_analyzer/list.h	/^static inline void list_replace_init(struct list_head *old,$/;"	f
-list_replace_rcu	include/liballoc/list.h	/^static inline void list_replace_rcu(struct list_head *old,$/;"	f
-list_splice	include/liballoc/list.h	/^static inline void list_splice(struct list_head *list, struct list_head *head)$/;"	f
 list_splice	include/libproto_analyzer/list.h	/^static inline void list_splice(struct list_head *list, struct list_head *head)$/;"	f
-list_splice_init	include/liballoc/list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	f
 list_splice_init	include/libproto_analyzer/list.h	/^static inline void list_splice_init(struct list_head *list,$/;"	f
 lock	include/libcre/sync_lock/sync_lock.h	/^	union lock{$/;"	u	struct:sync_lock_s
 lock	include/libcre/sync_lock/sync_lock.h	/^	}lock;$/;"	m	struct:sync_lock_s	typeref:union:sync_lock_s::lock
@@ -386,13 +305,10 @@ mutex	include/libcre/sync_lock/sync_lock.h	/^		pthread_mutex_t mutex;$/;"	m	unio
 name	include/liballoc/allocator.h	/^	char name[COTAINOR_NAME_MAX_LEN];$/;"	m	struct:allocator
 name	include/libcre/sync_lock/sync_lock.h	/^	char name[SYNC_LOCK_NAME_MAX_LEN];$/;"	m	struct:sync_lock_module
 name	include/libproto_analyzer/protocol_format_set.h	/^	char name[MAX_NAME_LEN];$/;"	m	struct:proto_info_list_s
-next	include/liballoc/list.h	/^	struct hlist_node *next, **pprev;$/;"	m	struct:hlist_node	typeref:struct:hlist_node::hlist_node
-next	include/liballoc/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
 next	include/libproto_analyzer/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::list_head
-obj-m	Makefile	/^obj-m :=  plat_driver.o$/;"	m
 pa_admin	include/libproto_analyzer/protocol_analyzer.h	/^	struct proto_analyzer_admin_s *pa_admin;$/;"	m	struct:protocol_analyzer_s	typeref:struct:protocol_analyzer_s::proto_analyzer_admin_s
-pa_array_s	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^typedef struct pa_array_s{$/;"	s	file:
-pa_array_t	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^}pa_array_t;$/;"	t	typeref:struct:pa_array_s	file:
+pa_array_s	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^typedef struct pa_array_s{$/;"	s	file:
+pa_array_t	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^}pa_array_t;$/;"	t	typeref:struct:pa_array_s	file:
 pa_check_protocol_num	libproto_analyzer/protocol_analyzer.c	/^int pa_check_protocol_num(struct protocol_analyzer_s *pa)$/;"	f
 pa_copy_protocol_format	libproto_analyzer/protocol_analyzer.c	/^int pa_copy_protocol_format(struct protocol_analyzer_s *pa)$/;"	f
 pa_create_protocol_analyzer	libproto_analyzer/protocol_analyzer.c	/^struct protocol_analyzer_s *pa_create_protocol_analyzer(allocator_t *allocator)$/;"	f
@@ -406,7 +322,7 @@ pa_get_protocol_byte_data	libproto_analyzer/protocol_analyzer.c	/^void pa_get_pr
 pa_get_value	libproto_analyzer/protocol_analyzer.c	/^int pa_get_value(const char *key,struct protocol_analyzer_s *pa)$/;"	f
 pa_init_protocol_analyzer	libproto_analyzer/protocol_analyzer.c	/^void pa_init_protocol_analyzer(uint32_t proto_no,$/;"	f
 pa_list_head_p	include/libproto_analyzer/protocol_analyzer.h	/^	struct list_head *pa_list_head_p;$/;"	m	struct:protocol_analyzer_s	typeref:struct:protocol_analyzer_s::list_head
-pa_p2	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^	struct protocol_analyzer_s **pa_p2;$/;"	m	struct:pa_array_s	typeref:struct:pa_array_s::protocol_analyzer_s	file:
+pa_p2	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^	struct protocol_analyzer_s **pa_p2;$/;"	m	struct:pa_array_s	typeref:struct:pa_array_s::protocol_analyzer_s	file:
 pa_parse_protocol_data	libproto_analyzer/protocol_analyzer.c	/^int pa_parse_protocol_data(struct protocol_analyzer_s *pa)$/;"	f
 pa_recompute_byte_pos	libproto_analyzer/protocol_analyzer.c	/^int pa_recompute_byte_pos(struct list_head *cur,struct protocol_analyzer_s *pa)$/;"	f
 pa_reset_vlen_flag	libproto_analyzer/protocol_analyzer.c	/^int pa_reset_vlen_flag(struct protocol_analyzer_s *pa)$/;"	f
@@ -420,8 +336,9 @@ pa_set_variable_length_value	libproto_analyzer/protocol_analyzer.c	/^int pa_set_
 pdev_priv	plat_driver.c	/^struct pdev_priv {$/;"	s	file:
 pdrv	plat_driver.c	/^static struct platform_driver pdrv = {$/;"	v	typeref:struct:platform_driver	file:
 pdrv_fops	plat_driver.c	/^static struct file_operations pdrv_fops = {$/;"	v	typeref:struct:file_operations	file:
-pdt_drv_proto_init_3019	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int pdt_drv_proto_init_3019(uint16_t proto_id,uint16_t lab,$/;"	f
-pdt_drv_proto_parse_3019	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^pdt_drv_proto_parse_3019(protocol_format_set_t *pfs_p,$/;"	f
+pdt_drv_proto_analyzer	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int pdt_drv_proto_analyzer()$/;"	f
+pdt_drv_proto_init_3019	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int pdt_drv_proto_init_3019(uint16_t proto_id,uint16_t lab,$/;"	f
+pdt_drv_proto_parse_3019	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^pdt_drv_proto_parse_3019(protocol_format_set_t *pfs_p,$/;"	f
 pf_list_head_p	include/libproto_analyzer/protocol_analyzer.h	/^	struct list_head *pf_list_head_p;$/;"	m	struct:protocol_analyzer_s	typeref:struct:protocol_analyzer_s::list_head
 pfs_add_list	libproto_analyzer/protocol_format_set.c	/^void pfs_add_list(struct list_head *new_head,struct list_head *hl_head)$/;"	f
 pfs_add_proto_link_list	libproto_analyzer/protocol_format_set.c	/^int pfs_add_proto_link_list(uint32_t llist_num,$/;"	f
@@ -437,22 +354,17 @@ pfs_p	include/libproto_analyzer/protocol_analyzer.h	/^	protocol_format_set_t *pf
 pfs_print_list_for_each	libproto_analyzer/protocol_format_set.c	/^void pfs_print_list_for_each(struct list_head *hl_head)$/;"	f
 pfs_print_proto_link_lists	libproto_analyzer/protocol_format_set.c	/^void pfs_print_proto_link_lists(protocol_format_set_t *pfp)$/;"	f
 pfs_release_head_list	libproto_analyzer/protocol_format_set.c	/^void pfs_release_head_list(struct list_head *hl_head)$/;"	f
-pfs_set_pdt_drv_proto_format	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^void pfs_set_pdt_drv_proto_format(protocol_format_set_t *pfs_p)$/;"	f
-pfs_set_pdu_format_ackd	libproto_analyzer/test/pdt_pdu_proto_format.c	/^int pfs_set_pdu_format_ackd(protocol_format_set_t *pfs_p)$/;"	f
+pfs_set_pdt_drv_proto_format	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^void pfs_set_pdt_drv_proto_format(protocol_format_set_t *pfs_p)$/;"	f
 pfs_set_proto_format_3008	libproto_analyzer/test/pdt_drv_proto_format.c	/^int pfs_set_proto_format_3008(protocol_format_set_t *pfs_p)$/;"	f
 pfs_set_proto_format_3019	libproto_analyzer/test/pdt_drv_proto_format.c	/^int pfs_set_proto_format_3019(protocol_format_set_t *pfs_p)$/;"	f
 pfs_set_proto_info	libproto_analyzer/protocol_format_set.c	/^pfs_set_proto_info($/;"	f
 phy_base	plat_driver.c	/^	unsigned long phy_base;$/;"	m	struct:pdev_priv	file:
 phy_size	plat_driver.c	/^	unsigned long phy_size;$/;"	m	struct:pdev_priv	file:
-plat_driver-objs	Makefile	/^plat_driver-objs := plat_driver.o$/;"	m
 plat_probe	plat_driver.c	/^plat_probe(struct platform_device *pdev)$/;"	f	file:
 plat_remove	plat_driver.c	/^plat_remove(struct platform_device *pdev)$/;"	f	file:
 pool	include/liballoc/allocator_ctr_alloc.h	/^	struct list_head *pool;$/;"	m	struct:cds_alloc_s	typeref:struct:cds_alloc_s::list_head
 pow	libproto_analyzer/protocol_analyzer.c	/^static double pow(double x,double y)$/;"	f	file:
-pprev	include/liballoc/list.h	/^	struct hlist_node *next, **pprev;$/;"	m	struct:hlist_node	typeref:struct:hlist_node::
-prefetch	include/liballoc/list.h	/^static inline void prefetch(const void *x) {;}$/;"	f
 prefetch	include/libproto_analyzer/list.h	/^static inline void prefetch(const void *x) {;}$/;"	f
-prev	include/liballoc/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
 prev	include/libproto_analyzer/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head::
 print_dbg_level	libdbg/debug.c	/^void print_dbg_level(uint32_t set_str)$/;"	f
 print_info_list	libproto_analyzer/protocol_format_set.c	/^void print_info_list(proto_info_list_t *info_list)$/;"	f
@@ -510,16 +422,11 @@ sync_unlock	libcre/sync_lock/sync_lock.c	/^inline int sync_unlock(struct sync_lo
 sys_alloc_alloc	liballoc/allocator_sys_alloc.c	/^void *sys_alloc_alloc(allocator_t *alloc,uint32_t size)$/;"	f
 sys_alloc_free	liballoc/allocator_sys_alloc.c	/^void sys_alloc_free(allocator_t *alloc,void *addr)$/;"	f
 test_allocator	liballoc/test_allocator.c	/^void test_allocator()$/;"	f
-test_pdt_drv_proto	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int test_pdt_drv_proto(protocol_format_set_t *pfs_p, allocator_t *allocator)$/;"	f
-test_pdt_proto_3008	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int test_pdt_proto_3008(protocol_format_set_t *pfs_p,$/;"	f
-test_pdt_proto_3019	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int test_pdt_proto_3019(protocol_format_set_t *pfs_p,$/;"	f
-test_pdt_proto_analyzer	libproto_analyzer/test/test_pdt_drv_proto_analyzer.c	/^int test_pdt_proto_analyzer()$/;"	f
-test_pdu_proto_analyzer	libproto_analyzer/test/test_pdt_pdu_proto_analyzer.c	/^int test_pdu_proto_analyzer()$/;"	f
-u16	include/liballoc/list.h	/^typedef unsigned short    u16;$/;"	t
+test_pdt_drv_proto	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int test_pdt_drv_proto(protocol_format_set_t *pfs_p, allocator_t *allocator)$/;"	f
+test_pdt_proto_3008	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int test_pdt_proto_3008(protocol_format_set_t *pfs_p,$/;"	f
+test_pdt_proto_3019	libproto_analyzer/test/pdt_drv_proto_analyzer.c	/^int test_pdt_proto_3019(protocol_format_set_t *pfs_p,$/;"	f
 u16	include/libproto_analyzer/list.h	/^typedef unsigned short    u16;$/;"	t
-u32	include/liballoc/list.h	/^typedef unsigned int      u32;$/;"	t
 u32	include/libproto_analyzer/list.h	/^typedef unsigned int      u32;$/;"	t
-u8	include/liballoc/list.h	/^typedef unsigned char     u8;$/;"	t
 u8	include/libproto_analyzer/list.h	/^typedef unsigned char     u8;$/;"	t
 uint16_t	include/libcre/basic_types.h	/^typedef unsigned short uint16_t;$/;"	t
 uint16_t	include/libproto_analyzer/my_types.h	/^typedef unsigned short uint16_t;$/;"	t

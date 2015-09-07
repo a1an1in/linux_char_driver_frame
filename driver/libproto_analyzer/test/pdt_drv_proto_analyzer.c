@@ -206,6 +206,7 @@ int pdt_drv_proto_analyzer()
 
 	pfs_p = pfs_create_proto_format_set(allocator);
 	init_proto_format_set(0x3000,100,pfs_p);
+
 	pfs_set_pdt_drv_proto_format(pfs_p);
 
 	test_pdt_drv_proto(pfs_p,allocator);
