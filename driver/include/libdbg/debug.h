@@ -87,12 +87,12 @@ enum{
 #ifdef OPEN_PDEBUG           
 	#define PS(level, fmt, args...) \
 		print_dbg_level(level);\
-		printk("[" fmt"]--[%s:%d]\n", ## args,__FILE__, __LINE__)
+		printk("[" fmt"]--[%-20s:%d]\n", ## args,__FILE__, __LINE__)
 	#define PSB(level,fmt,saddr,slen)\
 		print_dbg_level(level);\
 		printk("[" fmt);\
 		printk_buffer(saddr,slen);\
-		printk("]--[%s:%d]\n",__FILE__, __LINE__)
+		printk("]--[%-20s:%d]\n",__FILE__, __LINE__)
 
 	#define PE(fmt,args...) \
 		if(3 >= 1) printk("[" fmt"\terror(%d):%s]--[%s:%s:%d]\n",\

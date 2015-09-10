@@ -14,8 +14,10 @@
 #TARGET file name
 TARGET = test
 #compile tools
-CC = gcc
-LD = ld
+#CC = gcc
+#LD = ld
+CC = armv5l-linux-gcc
+LD = armv5l-linux-ld
 export PROJECT_PATH = $(shell pwd)
 export INCLUDES = -I /usr/local/include/libcdf
 
@@ -31,7 +33,7 @@ all :
 		echo "Building $(TARGET) is failed !"; \
 		exit 12; \
 	else\
-		echo $(CC) -o $(PROJECT_PATH)/bin/$(TARGET) $$BUILD_IN_FILES -lpthread -lm;\
+		echo $(CC) -o $(PROJECT_PATH)/bin/$(TARGET) $$BUILD_IN_FILES -lpthread -lm -lcdf;\
 		echo ;\
 		echo $(TARGET) has been created!;\
 		echo ;\

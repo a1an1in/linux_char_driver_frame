@@ -1,9 +1,7 @@
 TARGET = build_in.o
 #COMOBJS = ../common/proto.o   #公共模块
-CC = armv5l-linux-gcc
-LD = armv5l-linux-ld
-#CC = gcc
-#LD = ld
+CC = gcc
+LD = ld
 CCFLAGS += -c 
 
 SRCS = $(wildcard *.c)

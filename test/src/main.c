@@ -43,6 +43,10 @@
  * 
  */
 #include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
 
 #include "libdbg/debug.h"
 #include "libdbg/libdbg_register_modules.h"
@@ -98,10 +102,16 @@ void test_datastructure()
 }
 void test_analyzer()
 {
-	test_pdt_proto_analyzer();
+	/*
+	 *test_pdt_proto_analyzer();
+	 */
 	/*
 	 *test_pdu_proto_analyzer();
 	 */
+}
+void test_hpi_driver()
+{
+	test_pdt_hpi_driver();
 }
 int main()
 {
@@ -115,9 +125,12 @@ int main()
 
 	dbg_str(DBG_DETAIL,"debugger is start up");
 
+
+
 	test_container();
 	test_datastructure();
 	test_analyzer();
+	test_hpi_driver();
 
 	dbg_str(DBG_DETAIL,"test end");
 

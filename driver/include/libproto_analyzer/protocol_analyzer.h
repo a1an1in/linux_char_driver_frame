@@ -3,6 +3,7 @@
 
 #include "liballoc/allocator.h"
 #include "libproto_analyzer/protocol_format_set.h"
+#include "libdata_structure/hash_list.h"
 
 typedef struct protocol_analyzer_s{
 #define MAX_PROTO_DATA_LEN 100
@@ -14,6 +15,7 @@ typedef struct protocol_analyzer_s{
 	struct list_head *pa_list_head_p;
 	struct proto_analyzer_admin_s *pa_admin;
 	allocator_t *allocator;
+	hash_map_t *hmap;
 
 	int (*find_protocol_format)(struct protocol_analyzer_s *pa);
 	int (*copy_protocol_format)(struct protocol_analyzer_s *pa); 
@@ -43,6 +45,5 @@ struct protocol_analyzer_s *pa_create_protocol_analyzer(allocator_t *allocator);
 void pa_init_protocol_analyzer(uint32_t proto_no, protocol_format_set_t *pfp, struct protocol_analyzer_s *pa);
 void pa_destroy_protocol_analyzer(struct protocol_analyzer_s *pa);
 int pa_reset_vlen_flag(struct protocol_analyzer_s *pa);
-int pa_set_buf(const char *key,uint8_t *data,uint32_t len,struct protocol_analyzer_s *pa);
 
 #endif

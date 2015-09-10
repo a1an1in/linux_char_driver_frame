@@ -4,7 +4,6 @@
 #include "libproto_analyzer/protocol_analyzer.h"
 #include "pdt_drv_proto_format.h"
 
-allocator_t *allocator;
 extern int pfs_set_proto_format_3008(protocol_format_set_t *pfs_p);
 
 int test_pdt_proto_3008(protocol_format_set_t *pfs_p,
@@ -201,6 +200,7 @@ int pdt_drv_proto_analyzer()
 {
 	protocol_format_set_t *pfs_p;
 	uint32_t ret = 0;
+	allocator_t *allocator;
 
 	allocator = allocator_creator(ALLOCATOR_TYPE_SYS_MALLOC,0);
 

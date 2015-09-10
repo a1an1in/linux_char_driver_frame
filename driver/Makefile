@@ -19,6 +19,12 @@ hpi_driver-objs += libproto_analyzer/protocol_format_set.o
 hpi_driver-objs += libproto_analyzer/test/pdt_drv_proto_format.o
 hpi_driver-objs += libproto_analyzer/test/pdt_drv_proto_analyzer.o
 
+hpi_driver-objs += libdata_structure/hash_map/hash_list.o
+hpi_driver-objs += libdata_structure/link_list/link_list.o
+hpi_driver-objs += libdata_structure/test/test_hashmap.o
+hpi_driver-objs += libdata_structure/test/test_link_list.o
+
+
 
 
 

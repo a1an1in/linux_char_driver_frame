@@ -25,9 +25,15 @@
 #include <linux/platform_device.h>
 
 #include <libdbg/debug.h>
+#include <liballoc/allocator.h>
 #include <liballoc/test_allocator.h>
 #include <liballoc/liballoc_register_modules.h>
 #include <libproto_analyzer/pdt_drv_proto_analyzer.h>
+#include <libproto_analyzer/protocol_format_set.h>
+#include <libproto_analyzer/protocol_analyzer.h>
+#include <libdata_structure/test_datastructure.h>
+
+#define VERSION 1.1.2.0
 
 #define DEF_MAJOR 	90
 
@@ -41,6 +47,8 @@ struct pdev_priv {
 	dev_t dev_id;
 	struct device *class_dev;
 };
+protocol_format_set_t *pfs_p;
+allocator_t *allocator;
 
 /*
  * file_operations->open
@@ -50,6 +58,7 @@ device_open(struct inode *inode, struct file *filp)
 {
 	struct pdev_priv *pdev_priv = container_of(inode->i_cdev, struct pdev_priv, cdev);
 
+	dbg_str(DBG_DETAIL,"device open");
 	filp->private_data = pdev_priv;
 	return 0;
 }
@@ -60,6 +69,7 @@ device_open(struct inode *inode, struct file *filp)
 static int 
 device_release(struct inode *inode, struct file *filp)
 {
+	dbg_str(DBG_DETAIL,"device release");
 	return 0;
 }
 
@@ -72,6 +82,7 @@ device_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
 	struct pdev_priv *pdev_priv = filp->private_data;
 	char *tmp = NULL;
 
+	dbg_str(DBG_DETAIL,"device read");
 	count = min(count, (size_t)(pdev_priv->phy_size - *f_pos));
 	if (0 == count)
 		return 0;
@@ -96,7 +107,39 @@ device_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
 static ssize_t
 device_write(struct file *filp, const char __user *buf, size_t count, loff_t *f_pos)
 {
+#define MAX_BUF_SIZE 1024
+	unsigned char data[MAX_BUF_SIZE];
+
+	dbg_str(DBG_DETAIL,"device write");
+	if(buf == NULL || count <=0){
+		dbg_str(DBG_ERROR,"write err");
+	}
+	copy_from_user(data,buf,count);
+	dbg_buf(DBG_DETAIL,"write data:",data,count);
+
+	struct protocol_analyzer_s *pa;
+
+	/*set and parse test*/
+	pa = pa_create_protocol_analyzer(allocator);
+	pa_init_protocol_analyzer(0x3008, pfs_p, pa);
+
+	dbg_str(DBG_DETAIL,"pa_parse_protocol_data");
+	memcpy(pa->protocol_data,data,count);
+	pa->protocol_data_len = count;
+	pa_parse_protocol_data(pa);
+
+	/*
+	 *dbg_str(DBG_IMPORTANT,"print list for each");
+	 *pfs_print_list_for_each(pa->pa_list_head_p);
+	 */
+
+	/*
+	 *dbg_str(DBG_DETAIL,"pa_destroy_protocol_analyzer");
+	 *pa_destroy_protocol_analyzer(pa);
+	 */
+
 	return 0;
+#undef MAX_BUF_SIZE
 }
 
 static struct file_operations pdrv_fops = {
@@ -171,7 +214,7 @@ plat_probe(struct platform_device *pdev)
 	 *    NULL,		[> drvdata <]
 	 *    "hpi_driver-%d", MINOR(pdev_priv->dev_id)); [> name <]
 	 */
-	pdev_priv->class_dev = class_device_create(pdev_priv->class,NULL,&pdev->dev,NULL,"hpi_driver");
+	pdev_priv->class_dev = class_device_create(pdev_priv->class,NULL,pdev_priv->cdev.dev,NULL,"hpi_driver");
 
 	if (IS_ERR(pdev_priv->class_dev)) {
 		ret = PTR_ERR(pdev_priv->class_dev);
@@ -189,9 +232,24 @@ plat_probe(struct platform_device *pdev)
 	 *test_allocator();
 	 */
 
-	pdt_drv_proto_analyzer();
+	/*
+	 *pdt_drv_proto_analyzer();
+	 */
+
+	allocator = allocator_creator(ALLOCATOR_TYPE_SYS_MALLOC,0);
+
+	pfs_p = pfs_create_proto_format_set(allocator);
+	init_proto_format_set(0x3000,100,pfs_p);
+
+	pfs_set_pdt_drv_proto_format(pfs_p);
+
+	/*
+	 *dbg_str(DBG_DETAIL,"pfs_destroy_protocol_format_set");
+	 *pfs_destroy_protocol_format_set(pfs_p);
+	 */
 
 	return 0;
+
 err2:
 	dbg_str(DBG_DETAIL,"run at here");
 	cdev_del(&pdev_priv->cdev);
@@ -248,5 +306,5 @@ module_init(driver_module_init);
 module_exit(driver_module_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("alan");
+MODULE_AUTHOR("alan lin");
 

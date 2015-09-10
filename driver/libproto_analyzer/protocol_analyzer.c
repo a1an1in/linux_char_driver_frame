@@ -45,16 +45,14 @@
 /*
  *#include <math.h>
  */
-/*
- *#include <linux/string.h>
- */
 #include "libdbg/debug.h"
 #include "libproto_analyzer/protocol_analyzer.h"
+#include "libdata_structure/hash_list.h"
 
-static int pow(int x,int y)
+static uint32_t pow(uint32_t x,uint32_t y)
 {
 
-	int pow_value = 1;
+	uint32_t pow_value = 1;
 	int i;
 	
 	for(i = 0;i <= y; i++)
@@ -105,15 +103,15 @@ int pa_find_protocol_format(struct protocol_analyzer_s *pa)
 int pa_copy_protocol_format(struct protocol_analyzer_s *pa)
 {
 	int ret = 0;
-	proto_head_list_t *head_list,*head_list_copy;
-	proto_info_list_t *info_list,*info_list_copy;
-	struct list_head *hl_head = pa->pf_list_head_p;
-	struct list_head *pos,*n;
-
 	if(pa->pf_list_head_p == NULL){
 		dbg_str(DBG_ERROR,"pa_copy_protocol_format,pf_list_head_p == NULL");
 		return -1;
 	}
+
+	proto_head_list_t *head_list,*head_list_copy;
+	proto_info_list_t *info_list,*info_list_copy;
+	struct list_head *hl_head = pa->pf_list_head_p;
+	struct list_head *pos,*n;
 
 	if(hl_head == NULL){
 		dbg_str(DBG_ERROR,"a_copy_protocol_format err,hl_head is NULL");
@@ -150,13 +148,67 @@ int pa_copy_protocol_format(struct protocol_analyzer_s *pa)
 	pa->pa_list_head_p = &head_list_copy->list_head;
 	return ret;
 }
+int pa_create_hash_table(struct protocol_analyzer_s *pa)
+{
+	hash_map_t *hmap;
+	pair_t *pair;
+	struct hash_map_node *mnode;
+	uint8_t key_size = 10;
+	uint8_t data_size = sizeof(proto_info_list_t *);
+	uint8_t bucket_size = 10;
+	int ret = 0;
+	struct list_head *hl_head = pa->pa_list_head_p;
+	struct list_head *pos,*n;
+	proto_head_list_t *head_list;
+	proto_info_list_t *info_list;
+	uint8_t addr_buffer[4];
+	uint32_t addr;
+	uint8_t *addr_p;
+
+	//change later
+	pair = create_pair(key_size,data_size);
+
+	hmap = hash_map_create(pa->allocator,0);
+	hash_map_init(hmap,
+			key_size,//uint32_t key_size,
+			data_size + key_size,
+			bucket_size,//uint32_t bucket_size,
+			default_hash_func,
+			default_key_cmp_func);
+
+	if(hl_head == NULL){
+		dbg_str(DBG_ERROR,"a_copy_protocol_format err,hl_head is NULL");
+		return -1;
+	}
+	head_list = container_of(hl_head,proto_head_list_t,list_head);
+
+	list_for_each_safe(pos, n, hl_head) {
+		info_list = container_of(pos,proto_info_list_t,list_head);
+		addr = (uint32_t)info_list;
+		addr_buffer[0] = (addr >> 24) & 0xff;
+		addr_buffer[1] = (addr >> 16) & 0xff;
+		addr_buffer[2] = (addr >> 8) & 0xff;
+		addr_buffer[3] = (addr >> 0) & 0xff;
+		make_pair(pair,info_list->name,addr_buffer);
+		hash_map_insert(hmap,pair->data);
+	}
+
+	pa->hmap = hmap;
+
+	/*
+	 *hash_map_for_each(hmap,hash_map_print_mnode);
+	 *hash_map_destroy(hmap);
+	 */
+
+	return ret;
+}
 proto_info_list_t * pa_find_key(const char *key,struct protocol_analyzer_s *pa)
 {
+#if 0
 	proto_info_list_t *ret = NULL;
 	proto_head_list_t *head_list;
 	proto_info_list_t *info_list;
 	struct list_head *pos,*n;
-
 	head_list = container_of(pa->pa_list_head_p,proto_head_list_t,list_head);
 
 	/*
@@ -184,6 +236,34 @@ proto_info_list_t * pa_find_key(const char *key,struct protocol_analyzer_s *pa)
 
 	dbg_str(DBG_WARNNING,"not found key:%s",key);
 	return ret;
+#endif
+#if 1
+	hash_map_t *hmap = pa->hmap;
+	hash_map_pos_t map_pos;
+	proto_info_list_t *info_list; 
+	uint8_t *addr_p;
+	uint8_t key_str[hmap->key_size];
+
+	if(strlen(key) < hmap->key_size){
+		memset(key_str,0,hmap->key_size);
+		memcpy(key_str,key,strlen(key));
+	}
+
+	map_pos = hash_map_search(hmap,(void *)key_str);
+	if(map_pos.hlist_node_p == NULL){
+		dbg_str(DBG_WARNNING,"not found key:%s",key_str);
+		return NULL;	
+	}
+	addr_p = hash_map_pos_get_pointer(map_pos);
+	info_list = (proto_info_list_t *)(addr_p[0] << 24 | addr_p[1] << 16 | addr_p[2] <<8 | addr_p[3]);
+	/*
+	 *dbg_str(DBG_IMPORTANT,"info list addr:%p",info_list);
+	 *print_info_list(info_list);
+	 *dbg_str(DBG_DETAIL,"found key:%s",key);
+	 */
+
+	return info_list;
+#endif
 }
 struct protocol_analyzer_s *pa_create_protocol_analyzer(allocator_t *allocator)
 {
@@ -203,6 +283,7 @@ void pa_init_protocol_analyzer(uint32_t proto_no,
 	pa->pfs_p = pfp;
 	pa_find_protocol_format(pa);
 	pa_copy_protocol_format(pa);
+	pa_create_hash_table(pa);
 }
 void pa_destroy_protocol_analyzer(struct protocol_analyzer_s *pa)
 {
@@ -210,6 +291,7 @@ void pa_destroy_protocol_analyzer(struct protocol_analyzer_s *pa)
 	pa->pf_list_head_p = NULL;
 	pfs_del_list_for_each(pa->pa_list_head_p);
 	pa->pa_list_head_p = NULL;
+	hash_map_destroy(pa->hmap);
 	allocator_mem_free(pa->allocator,pa);
 }
 //there may have problem,mem managment
@@ -325,11 +407,11 @@ int pa_recompute_byte_pos(struct list_head *cur,struct protocol_analyzer_s *pa)
 int pa_set_variable_length_flag(struct protocol_analyzer_s *pa)
 {
 	struct list_head *list_head_p = pa->pa_list_head_p;
+	proto_head_list_t *head_list;
+	proto_info_list_t *info_list,*info_list_find;;
 	struct list_head *pos,*n;
 	uint8_t vlenth_flag;
 	int ret = 0;
-	proto_head_list_t *head_list;
-	proto_info_list_t *info_list,*info_list_find;;
 
 	if(list_head_p == NULL){
 		dbg_str(DBG_ERROR,"pa_list_head_p is NULL");
@@ -559,13 +641,13 @@ int pa_generate_protocol_data(struct protocol_analyzer_s *pa)
 	uint32_t data;
 	uint8_t vlenth_flag;
 	int ret = 0;
-	struct list_head *pos,*n;
-	proto_head_list_t *head_list;
-	proto_info_list_t *info_list;
 	if(list_head_p == NULL){
 		dbg_str(DBG_ERROR,"pa_list_head_p is NULL");
 		return -1;
 	}
+	proto_head_list_t *head_list;
+	proto_info_list_t *info_list;
+	struct list_head *pos,*n;
 
 	dbg_str(DBG_DETAIL,"pa_generate_protocol_data");
 
@@ -651,9 +733,6 @@ int pa_parse_protocol_data(struct protocol_analyzer_s *pa)
 {
 	struct list_head *list_head_p;
 	int ret = 0;
-	proto_head_list_t *head_list;
-	proto_info_list_t *info_list;
-	struct list_head *pos,*n;
 
 	if(pa == NULL){
 		dbg_str(DBG_ERROR,"pa is NULL");
@@ -669,6 +748,9 @@ int pa_parse_protocol_data(struct protocol_analyzer_s *pa)
 		return -1;
 	}
 
+	proto_head_list_t *head_list;
+	proto_info_list_t *info_list;
+	struct list_head *pos,*n;
 
 	dbg_str(DBG_DETAIL,"pa_parse_protocol_data");
 	head_list = container_of(list_head_p,proto_head_list_t,list_head);
