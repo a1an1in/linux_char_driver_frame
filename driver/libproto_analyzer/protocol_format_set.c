@@ -136,25 +136,18 @@ void print_info_list(proto_info_list_t *info_list)
 			printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
 					"vlenth_flag=%d,vlenth_value_flag=%d,"
 					"vlenth_value_assigned_flag=%d,value=0x%x,vl_index=%s\n",
-					info_list->name,
-					info_list->byte_pos,
-					info_list->bit_pos,
-					info_list->len,
-					info_list->vlenth_flag,
-					info_list->vlenth_value_flag,
-					info_list->vlenth_value_assigned_flag,
-					info_list->data,
+					info_list->name, info_list->byte_pos,
+					info_list->bit_pos, info_list->len,
+					info_list->vlenth_flag, info_list->vlenth_value_flag,
+					info_list->vlenth_value_assigned_flag, info_list->data,
 					info_list->vlenth_index);
 		else{
 			printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
 					"vlenth_flag=%d,vlenth_value_flag=%d,"
 					"vlenth_value_assigned_flag=%d,vl_index=%s\n",
-					info_list->name,
-					info_list->byte_pos,
-					info_list->bit_pos,
-					info_list->len,
-					info_list->vlenth_flag,
-					info_list->vlenth_value_flag,
+					info_list->name, info_list->byte_pos,
+					info_list->bit_pos, info_list->len,
+					info_list->vlenth_flag, info_list->vlenth_value_flag,
 					info_list->vlenth_value_assigned_flag,
 					info_list->vlenth_index);
 			if(info_list->buf.data_p != NULL)
@@ -165,15 +158,11 @@ void print_info_list(proto_info_list_t *info_list)
 		printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
 				"vlenth_flag=%d,vlenth_value_flag=%d,"
 				"vlenth_value_assigned_flag=%d,value=0x%x,vl_index=%s\n",
-				info_list->name,
-				info_list->byte_pos,
-				info_list->bit_pos,
-				info_list->len,
-				info_list->vlenth_flag,
-				info_list->vlenth_value_flag,
-				info_list->vlenth_value_assigned_flag,
-				info_list->data,
-				info_list->vlenth_index);
+				info_list->name, info_list->byte_pos,
+				info_list->bit_pos, info_list->len,
+				info_list->vlenth_flag, info_list->vlenth_value_flag,
+				info_list->vlenth_value_assigned_flag, 
+				info_list->data, info_list->vlenth_index);
 	}
 
 }
@@ -365,11 +354,11 @@ void set_proto_info_attribs(char *name,void *attr_value,proto_info_list_t *info_
 	}else{
 	}
 }
-#define MAX_PROTOCOL_NUM 200
 int pfs_add_proto_link_list(uint32_t llist_num,
 		struct list_head *new_proto_llist,
 		protocol_format_set_t *pfs_ptr)
 {
+#define MAX_PROTOCOL_NUM 200
 	struct list_head **list_head = pfs_ptr->list_head_p2;
 	if(llist_num > MAX_PROTOCOL_NUM){
 		dbg_str(DBG_ERROR,"max_protocol_num greater than setting");
@@ -382,6 +371,7 @@ int pfs_add_proto_link_list(uint32_t llist_num,
 	list_head[llist_num] = new_proto_llist;
 	pfs_ptr->proto_total_num++;
 	return 0;
+#undef MAX_PROTOCOL_NUM 
 }
 
 proto_info_list_t * 

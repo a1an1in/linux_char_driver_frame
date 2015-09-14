@@ -25,6 +25,9 @@ hpi_driver-objs += libdata_structure/test/test_hashmap.o
 hpi_driver-objs += libdata_structure/test/test_link_list.o
 
 
+hpi_driver-objs += chc_admin/chc_admin.o
+
+
 
 
 

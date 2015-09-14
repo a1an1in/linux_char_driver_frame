@@ -177,6 +177,7 @@ int llist_delete(llist_t *llist, list_pos_t pos)
 	allocator_mem_free(llist->allocator,p);
 	return 0;
 }
+//not consider llist is null
 list_t *llist_detach(llist_t *llist, list_pos_t pos)
 {
 	list_t *p;
