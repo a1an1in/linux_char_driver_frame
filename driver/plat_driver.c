@@ -32,6 +32,8 @@
 #include <libproto_analyzer/protocol_format_set.h>
 #include <libproto_analyzer/protocol_analyzer.h>
 #include <libdata_structure/test_datastructure.h>
+#include <business/business.h>
+#include <chc_admin/chc_admin.h>
 
 #define VERSION 1.1.2.0
 
@@ -109,6 +111,7 @@ device_write(struct file *filp, const char __user *buf, size_t count, loff_t *f_
 {
 #define MAX_BUF_SIZE 1024
 	unsigned char data[MAX_BUF_SIZE];
+	uint16_t command = 0x3008;
 
 	dbg_str(DBG_DETAIL,"device write");
 	if(buf == NULL || count <=0){
@@ -121,12 +124,14 @@ device_write(struct file *filp, const char __user *buf, size_t count, loff_t *f_
 
 	/*set and parse test*/
 	pa = pa_create_protocol_analyzer(allocator);
-	pa_init_protocol_analyzer(0x3008, pfs_p, pa);
+	pa_init_protocol_analyzer(command, pfs_p, pa);
 
 	dbg_str(DBG_DETAIL,"pa_parse_protocol_data");
 	memcpy(pa->protocol_data,data,count);
 	pa->protocol_data_len = count;
 	pa_parse_protocol_data(pa);
+
+	process_protocol(command,pa);
 
 	/*
 	 *dbg_str(DBG_IMPORTANT,"print list for each");
@@ -236,12 +241,27 @@ plat_probe(struct platform_device *pdev)
 	 *pdt_drv_proto_analyzer();
 	 */
 
+	/* create mem allocator */
 	allocator = allocator_creator(ALLOCATOR_TYPE_SYS_MALLOC,0);
+	if(allocator == NULL){
+		dbg_str(DBG_ERROR,"allocator_creator");
+		goto err3;
+	}
 
+	/* create protocol format set */
 	pfs_p = pfs_create_proto_format_set(allocator);
+	if(pfs_p == NULL){
+		dbg_str(DBG_ERROR,"pfs_create_proto_format_set");
+		goto err4;
+	}
 	init_proto_format_set(0x3000,100,pfs_p);
 
 	pfs_set_pdt_drv_proto_format(pfs_p);
+
+
+	/* create chc admin */
+	chc_admin_slot1_gp = create_chc_admin();
+	chc_admin_slot2_gp = create_chc_admin();
 
 	/*
 	 *dbg_str(DBG_DETAIL,"pfs_destroy_protocol_format_set");
@@ -250,6 +270,10 @@ plat_probe(struct platform_device *pdev)
 
 	return 0;
 
+err4:
+	allocator_destroy(allocator);
+err3:
+	device_destroy(pdev_priv->class, pdev_priv->dev_id);
 err2:
 	dbg_str(DBG_DETAIL,"run at here");
 	cdev_del(&pdev_priv->cdev);
@@ -269,6 +293,8 @@ plat_remove(struct platform_device *pdev)
 {
 	struct pdev_priv *pdev_priv = platform_get_drvdata(pdev);
 
+	destroy_chc_admin(chc_admin_slot1_gp);
+	destroy_chc_admin(chc_admin_slot2_gp);
 	device_destroy(pdev_priv->class, pdev_priv->dev_id);
 	class_destroy(pdev_priv->class);
 	cdev_del(&pdev_priv->cdev);

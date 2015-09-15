@@ -15,6 +15,8 @@
  *
  * =====================================================================================
  */
+#ifndef __CHC_ADMIN_H__
+#define __CHC_ADMIN_H__
 
 #include <liballoc/allocator.h>
 #include <libdata_structure/link_list_struct.h>
@@ -54,6 +56,7 @@ typedef struct task_s{
 	uint8_t type;
 	uint8_t slot_type;
 	uint16_t slot_num;
+	uint16_t tact_info;
 }task_t;
 
 typedef struct chc_admin_s{
@@ -68,3 +71,12 @@ typedef struct chc_admin_s{
 	hash_map_t *voice_user_designate_slot;
 
 }chc_admin_t;
+
+extern chc_admin_t *chc_admin_slot1_gp;
+extern chc_admin_t *chc_admin_slot2_gp;
+chc_admin_t *create_chc_admin();
+void destroy_chc_admin(chc_admin_t *admin);
+void add_task(chc_admin_t *admin,task_t *task,uint8_t flag);
+int get_task(chc_admin_t *admin,uint8_t flag,uint16_t slot_num,task_t **task);
+
+#endif

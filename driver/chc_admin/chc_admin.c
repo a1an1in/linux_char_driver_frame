@@ -1,7 +1,7 @@
 /*
  * =====================================================================================
  *
- *       Filename:  task.c
+ *       Filename:  chc admin.c
  *
  *    Description:  
  *
@@ -34,6 +34,9 @@
  *    hash_map_t *voice_user_designate_slot;
  *}chc_admin_t;
  */
+
+chc_admin_t *chc_admin_slot1_gp;
+chc_admin_t *chc_admin_slot2_gp;
 
 chc_admin_t *create_chc_admin()
 {
@@ -169,6 +172,7 @@ void add_task(chc_admin_t *admin,task_t *task,uint8_t flag)
 
 	}else if(flag == TASK_FLAG_SND){
 		if(task->slot_type == SLOT_TYPE_SYS_DESIGNATE && task->type == TASK_TYPE_DATA){
+			dbg_str(DBG_DETAIL,"SLOT_TYPE_SYS_DESIGNATE, TASK_TYPE_DATA");
 			llist_push_back(admin->data_sys_designate_slot,task);
 		}else if(task->slot_type == SLOT_TYPE_SYS_DESIGNATE && task->type == TASK_TYPE_VOICE){
 			llist_push_back(admin->voice_sys_designate_slot,task);

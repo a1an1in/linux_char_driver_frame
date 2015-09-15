@@ -2,7 +2,7 @@
 #include "liballoc/allocator.h"
 #include "libproto_analyzer/protocol_format_set.h"
 #include "libproto_analyzer/protocol_analyzer.h"
-#include "pdt_drv_proto_format.h"
+#include <libproto_analyzer/pdt_drv_proto_format.h>
 
 extern int pfs_set_proto_format_3008(protocol_format_set_t *pfs_p);
 

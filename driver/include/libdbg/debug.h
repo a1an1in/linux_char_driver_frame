@@ -84,15 +84,35 @@ enum{
 #define OPEN_ERR_DEBUG 		//debug packet switch
 
 
+/*
+ *#ifdef OPEN_PDEBUG           
+ *    #define PS(level, fmt, args...) \
+ *        print_dbg_level(level);\
+ *        printk("[" fmt"]--[%-20s:%d]\n", ## args,__FILE__, __LINE__)
+ *    #define PSB(level,fmt,saddr,slen)\
+ *        print_dbg_level(level);\
+ *        printk("[" fmt);\
+ *        printk_buffer(saddr,slen);\
+ *        printk("]--[%-20s:%d]\n",__FILE__, __LINE__)
+ *
+ *    #define PE(fmt,args...) \
+ *        if(3 >= 1) printk("[" fmt"\terror(%d):%s]--[%s:%s:%d]\n",\
+ *            ## args,errno,strerror(errno),__FILE__,__PRETTY_FUNCTION__, __LINE__)
+ *#else
+ *    #define PS(level, fmt, args...) do {} while(0)  		//什么也不做
+ *    #define PE(fmt, args...) do {} while(0)
+ *    #define PSB(level,fmt,saddr,slen) do {} while(0)
+ *#endif
+ */
 #ifdef OPEN_PDEBUG           
 	#define PS(level, fmt, args...) \
 		print_dbg_level(level);\
-		printk("[" fmt"]--[%-20s:%d]\n", ## args,__FILE__, __LINE__)
+		printk("[" fmt"]--[%d]\n", ## args, __LINE__)
 	#define PSB(level,fmt,saddr,slen)\
 		print_dbg_level(level);\
 		printk("[" fmt);\
 		printk_buffer(saddr,slen);\
-		printk("]--[%-20s:%d]\n",__FILE__, __LINE__)
+		printk("]--[%d]\n",__LINE__)
 
 	#define PE(fmt,args...) \
 		if(3 >= 1) printk("[" fmt"\terror(%d):%s]--[%s:%s:%d]\n",\
