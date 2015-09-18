@@ -23,6 +23,8 @@
 #include <linux/io.h>		/* readb/writeb */
 #include <linux/uaccess.h>
 #include <linux/platform_device.h>
+#include <linux/time.h>
+#include <linux/delay.h>
 
 #include <libdbg/debug.h>
 #include <liballoc/allocator.h>
@@ -33,11 +35,12 @@
 #include <libproto_analyzer/protocol_analyzer.h>
 #include <libdata_structure/test_datastructure.h>
 #include <business/business.h>
-#include <chc_admin/chc_admin.h>
+#include <task_admin/task_admin.h>
 
 #define VERSION 1.1.2.0
 
 #define DEF_MAJOR 	90
+extern void pfs_set_pdt_drv_proto_format(protocol_format_set_t *pfs_p);
 
 struct pdev_priv {
 	unsigned long phy_base;
@@ -48,6 +51,8 @@ struct pdev_priv {
 	struct class *class;
 	dev_t dev_id;
 	struct device *class_dev;
+	wait_queue_head_t writeq;
+	wait_queue_head_t readq;
 };
 protocol_format_set_t *pfs_p;
 allocator_t *allocator;
@@ -85,74 +90,98 @@ device_read(struct file *filp, char __user *buf, size_t count, loff_t *f_pos)
 	char *tmp = NULL;
 
 	dbg_str(DBG_DETAIL,"device read");
-	count = min(count, (size_t)(pdev_priv->phy_size - *f_pos));
-	if (0 == count)
-		return 0;
-	
-	/* read register */
-	tmp = (char *)kzalloc(count, GFP_KERNEL);
-	if (NULL == tmp)
-		return -ENOMEM;
-	memcpy_fromio(tmp, (pdev_priv->vir_base + *f_pos), count);
+	wait_event(pdev_priv->readq,0);
+/*
+ *    count = min(count, (size_t)(pdev_priv->phy_size - *f_pos));
+ *    if (0 == count)
+ *        return 0;
+ *    
+ *    [> read register <]
+ *    tmp = (char *)kzalloc(count, GFP_KERNEL);
+ *    if (NULL == tmp)
+ *        return -ENOMEM;
+ *    memcpy_fromio(tmp, (pdev_priv->vir_base + *f_pos), count);
+ *
+ *    [> copy to user <]
+ *    if (copy_to_user(buf, tmp, count)) {
+ *        kfree(tmp);
+ *        return -EFAULT;
+ *    }
+ *
+ *    *f_pos += count;
+ */
 
-	/* copy to user */
-	if (copy_to_user(buf, tmp, count)) {
-		kfree(tmp);
-		return -EFAULT;
-	}
-
-	*f_pos += count;
-
+	count = 0;
 	return count;
 }
+
+/*
+ *struct protocol_analyzer_s *pa;
+ */
 
 static ssize_t
 device_write(struct file *filp, const char __user *buf, size_t count, loff_t *f_pos)
 {
 #define MAX_BUF_SIZE 1024
 	unsigned char data[MAX_BUF_SIZE];
-	uint16_t command = 0x3008;
+	uint16_t command; 
+	/*
+	 *struct timeval tval1,tval2,tval3,tval4,tval5,tval6;
+	 *struct timespec tspec1,tspec2,tspec3,tspec4,tspec5,tspec6;
+	 */
 
-	dbg_str(DBG_DETAIL,"device write");
 	if(buf == NULL || count <=0){
 		dbg_str(DBG_ERROR,"write err");
 	}
 	copy_from_user(data,buf,count);
-	dbg_buf(DBG_DETAIL,"write data:",data,count);
+	dbg_buf(DBG_IMPORTANT,"device write data:",data,count);
 
-	struct protocol_analyzer_s *pa;
-
-	/*set and parse test*/
-	pa = pa_create_protocol_analyzer(allocator);
-	pa_init_protocol_analyzer(command, pfs_p, pa);
-
-	dbg_str(DBG_DETAIL,"pa_parse_protocol_data");
-	memcpy(pa->protocol_data,data,count);
-	pa->protocol_data_len = count;
-	pa_parse_protocol_data(pa);
-
-	process_protocol(command,pa);
+	command = data[0] << 8 | data[1];
+	process_protocol(command,data,count);
 
 	/*
-	 *dbg_str(DBG_IMPORTANT,"print list for each");
-	 *pfs_print_list_for_each(pa->pa_list_head_p);
-	 */
-
-	/*
-	 *dbg_str(DBG_DETAIL,"pa_destroy_protocol_analyzer");
-	 *pa_destroy_protocol_analyzer(pa);
+	 *do_gettimeofday(&tval5);
+	 *getnstimeofday(&tspec5);
+	 *udelay(30);
+	 *do_gettimeofday(&tval6);
+	 *getnstimeofday(&tspec6);
+	 *printk("1timeval:%lds -- %ldus\n",tval1.tv_sec,tval1.tv_usec); 
+	 *printk("2timeval:%lds -- %ldus\n",tval2.tv_sec,tval2.tv_usec); 
+	 *printk("3timeval:%lds -- %ldus\n",tval3.tv_sec,tval3.tv_usec); 
+	 *printk("4timeval:%lds -- %ldus\n",tval4.tv_sec,tval4.tv_usec); 
+	 *printk("5timeval:%lds -- %ldus\n",tval5.tv_sec,tval5.tv_usec); 
+	 *printk("6timeval:%lds -- %ldus\n",tval6.tv_sec,tval6.tv_usec); 
+	 *printk("1timeval:%lds -- %ldns\n",tspec1.tv_sec,tspec1.tv_nsec); 
+	 *printk("2timeval:%lds -- %ldns\n",tspec2.tv_sec,tspec2.tv_nsec); 
+	 *printk("3timeval:%lds -- %ldns\n",tspec3.tv_sec,tspec3.tv_nsec); 
+	 *printk("4timeval:%lds -- %ldns\n",tspec4.tv_sec,tspec4.tv_nsec); 
+	 *printk("5timeval:%lds -- %ldns\n",tspec5.tv_sec,tspec5.tv_nsec); 
+	 *printk("6timeval:%lds -- %ldns\n",tspec6.tv_sec,tspec6.tv_nsec); 
+	 *printk("2-1diff =%ldus\n",(tspec2.tv_nsec - tspec1.tv_nsec)/1000);
+	 *printk("3-2diff =%ldus\n",(tspec3.tv_nsec - tspec2.tv_nsec)/1000);
+	 *printk("4-3diff =%ldus\n",(tspec4.tv_nsec - tspec3.tv_nsec)/1000);
+	 *printk("5-4diff =%ldus\n",(tspec5.tv_nsec - tspec4.tv_nsec)/1000);
+	 *printk("6-5diff =%ldus\n",(tspec6.tv_nsec - tspec5.tv_nsec)/1000);
+	 *printk("5-1diff =%ldus\n",(tspec5.tv_nsec - tspec1.tv_nsec)/1000);
 	 */
 
 	return 0;
 #undef MAX_BUF_SIZE
 }
-
+static int 
+device_ioctl(struct inode *inodep,struct file *filp,unsigned int cmd,unsigned long arg)
+{
+	if(cmd != 2)
+		dbg_str(DBG_DETAIL,"device_ioctl,cmd=%d",cmd);
+	return 0;
+}
 static struct file_operations pdrv_fops = {
 	.owner   = THIS_MODULE,
 	.open    = device_open,
 	.release = device_release,
 	.read    = device_read,
 	.write   = device_write,
+	.ioctl = device_ioctl,
 };
 
 
@@ -219,7 +248,7 @@ plat_probe(struct platform_device *pdev)
 	 *    NULL,		[> drvdata <]
 	 *    "hpi_driver-%d", MINOR(pdev_priv->dev_id)); [> name <]
 	 */
-	pdev_priv->class_dev = class_device_create(pdev_priv->class,NULL,pdev_priv->cdev.dev,NULL,"hpi_driver");
+	pdev_priv->class_dev = class_device_create(pdev_priv->class,NULL,pdev_priv->cdev.dev,NULL,"ssc");
 
 	if (IS_ERR(pdev_priv->class_dev)) {
 		ret = PTR_ERR(pdev_priv->class_dev);
@@ -231,6 +260,9 @@ plat_probe(struct platform_device *pdev)
 
 
 	dbg_str(DBG_DETAIL,"my test begin");
+
+	init_waitqueue_head(&pdev_priv->writeq);
+	init_waitqueue_head(&pdev_priv->readq);
 
 	liballoc_register_modules();
 	/*
@@ -259,14 +291,18 @@ plat_probe(struct platform_device *pdev)
 	pfs_set_pdt_drv_proto_format(pfs_p);
 
 
-	/* create chc admin */
-	chc_admin_slot1_gp = create_chc_admin();
-	chc_admin_slot2_gp = create_chc_admin();
+	/* create task admin */
+	task_admin_slot1_gp = create_task_admin();
+	task_admin_slot2_gp = create_task_admin();
 
 	/*
 	 *dbg_str(DBG_DETAIL,"pfs_destroy_protocol_format_set");
 	 *pfs_destroy_protocol_format_set(pfs_p);
 	 */
+	 /*
+      *pa = pa_create_protocol_analyzer(allocator);
+      *pa_init_protocol_analyzer(0x3008, pfs_p, pa);
+	  */
 
 	return 0;
 
@@ -293,8 +329,8 @@ plat_remove(struct platform_device *pdev)
 {
 	struct pdev_priv *pdev_priv = platform_get_drvdata(pdev);
 
-	destroy_chc_admin(chc_admin_slot1_gp);
-	destroy_chc_admin(chc_admin_slot2_gp);
+	destroy_task_admin(task_admin_slot1_gp);
+	destroy_task_admin(task_admin_slot2_gp);
 	device_destroy(pdev_priv->class, pdev_priv->dev_id);
 	class_destroy(pdev_priv->class);
 	cdev_del(&pdev_priv->cdev);

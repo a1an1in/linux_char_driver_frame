@@ -152,7 +152,7 @@ int hash_map_insert(hash_map_t *hmap,void *data)
 		hash_map_pos_init(&hmap->begin, hlist[bucket_pos].first, bucket_pos, hlist,hmap);
 		dbg_str(DBG_WARNNING,"change begin pos");
 	}
-	dbg_str(DBG_IMPORTANT,"bucket_pos =%d,first =%p,next=%p,begin.hash_map_pos=%p",
+	dbg_str(DBG_DETAIL,"bucket_pos =%d,first =%p,next=%p,begin.hash_map_pos=%p",
 			bucket_pos,
 			hlist[bucket_pos].first,
 			hlist[bucket_pos].first->next,

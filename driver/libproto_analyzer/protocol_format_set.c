@@ -132,24 +132,32 @@ void print_info_list(proto_info_list_t *info_list)
 	if(info_list == NULL)
 		return;
 	if(info_list->len_unit == 8){
-		if(info_list->len <= 4)
-			printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
-					"vlenth_flag=%d,vlenth_value_flag=%d,"
-					"vlenth_value_assigned_flag=%d,value=0x%x,vl_index=%s\n",
-					info_list->name, info_list->byte_pos,
-					info_list->bit_pos, info_list->len,
-					info_list->vlenth_flag, info_list->vlenth_value_flag,
-					info_list->vlenth_value_assigned_flag, info_list->data,
-					info_list->vlenth_index);
+		if(info_list->len <= 4&&info_list->buf.data_p == NULL)
+			/*
+			 *printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
+			 *        "vlenth_flag=%d,vlenth_value_flag=%d,"
+			 *        "vlenth_value_assigned_flag=%d,value=0x%x,vl_index=%s\n",
+			 *        info_list->name, info_list->byte_pos,
+			 *        info_list->bit_pos, info_list->len,
+			 *        info_list->vlenth_flag, info_list->vlenth_value_flag,
+			 *        info_list->vlenth_value_assigned_flag, info_list->data,
+			 *        info_list->vlenth_index);
+			 */
+			dbg_str(DBG_DETAIL,"%-10s->0x%x", info_list->name,info_list->data);
 		else{
-			printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
-					"vlenth_flag=%d,vlenth_value_flag=%d,"
-					"vlenth_value_assigned_flag=%d,vl_index=%s\n",
-					info_list->name, info_list->byte_pos,
-					info_list->bit_pos, info_list->len,
-					info_list->vlenth_flag, info_list->vlenth_value_flag,
-					info_list->vlenth_value_assigned_flag,
-					info_list->vlenth_index);
+			/*
+			 *printk("name=%10s,byte_pos=%2d,bit_pos=%d,len=%2d,"
+			 *        "vlenth_flag=%d,vlenth_value_flag=%d,"
+			 *        "vlenth_value_assigned_flag=%d,vl_index=%s\n",
+			 *        info_list->name, info_list->byte_pos,
+			 *        info_list->bit_pos, info_list->len,
+			 *        info_list->vlenth_flag, info_list->vlenth_value_flag,
+			 *        info_list->vlenth_value_assigned_flag,
+			 *        info_list->vlenth_index);
+			 *if(info_list->buf.data_p != NULL)
+			 *    dbg_buf(DBG_DETAIL,"buf:",info_list->buf.data_p,info_list->len);
+			 */
+			dbg_str(DBG_DETAIL,"%-10s", info_list->name);	
 			if(info_list->buf.data_p != NULL)
 				dbg_buf(DBG_DETAIL,"buf:",info_list->buf.data_p,info_list->len);
 		}

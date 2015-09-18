@@ -50,4 +50,4 @@
 #define COMMAND_0X301E  0x301E
 #define COMMAND_0X301F  0x301F
 
-void process_protocol(uint16_t command,struct protocol_analyzer_s *pa);
+void process_protocol(uint16_t command,uint8_t *data,uint32_t len);

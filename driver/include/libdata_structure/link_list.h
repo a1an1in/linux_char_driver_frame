@@ -37,4 +37,5 @@ int llist_pop_front(llist_t *llist);
 int llist_destroy(llist_t *llist);
 void *llist_pos_get_pointer(list_pos_t pos);
 void llist_for_each(llist_t *llist,void (*func)(list_t *list));
+list_t *llist_detach_front(llist_t *llist);
 #endif

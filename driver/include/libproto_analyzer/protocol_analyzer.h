@@ -45,5 +45,6 @@ struct protocol_analyzer_s *pa_create_protocol_analyzer(allocator_t *allocator);
 void pa_init_protocol_analyzer(uint32_t proto_no, protocol_format_set_t *pfp, struct protocol_analyzer_s *pa);
 void pa_destroy_protocol_analyzer(struct protocol_analyzer_s *pa);
 int pa_reset_vlen_flag(struct protocol_analyzer_s *pa);
+int pa_set_buf(const char *key,uint8_t *data,uint32_t len,struct protocol_analyzer_s *pa);
 
 #endif

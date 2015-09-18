@@ -77,6 +77,9 @@ enum{
 
 /*debug switch*/
 #define PDEBUG_LEVEL  LV_DETAIL
+/*
+ *#define PDEBUG_LEVEL  LV_IMPORTANT
+ */
 #define SDEBUG_LEVEL  LV_DETAIL
 
 #define OPEN_DEBUG 

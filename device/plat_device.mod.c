@@ -11,10 +11,28 @@ __attribute__((section(".gnu.linkonce.this_module"))) = {
 #ifdef CONFIG_MODULE_UNLOAD
  .exit = cleanup_module,
 #endif
+ .arch = MODULE_ARCH_INIT,
+};
+
+static const struct modversion_info ____versions[]
+__used
+__attribute__((section("__versions"))) = {
+	{ 0x41086e, "module_layout" },
+	{ 0x976b8801, "platform_device_register" },
+	{ 0xb72397d5, "printk" },
+	{ 0x69b042b4, "platform_device_unregister" },
 };
 
 static const char __module_depends[]
-__attribute_used__
+__used
 __attribute__((section(".modinfo"))) =
 "depends=";
 
+
+MODULE_INFO(srcversion, "C9210C59AFF0219BC5C1730");
+
+static const struct rheldata _rheldata __used
+__attribute__((section(".rheldata"))) = {
+	.rhel_major = 6,
+	.rhel_minor = 6,
+};

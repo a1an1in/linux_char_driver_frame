@@ -35,7 +35,7 @@ enum slot_type{
 	SLOT_TYPE_SYS_DESIGNATE = 0,
 	SLOT_TYPE_USER_DESIGNATE
 };
-enum chc_state{
+enum task_state{
 	CHC_STATE_TX = 0,
 	CHC_STATE_RX,
 	CHC_STATE_IDLE,
@@ -59,24 +59,25 @@ typedef struct task_s{
 	uint16_t tact_info;
 }task_t;
 
-typedef struct chc_admin_s{
+typedef struct task_admin_s{
 	uint32_t slot;
 	allocator_t *allocator;
 	pair_t *pair;
-	uint32_t chc_state;
+	uint32_t task_state;
 
 	llist_t *data_sys_designate_slot;
 	llist_t *voice_sys_designate_slot;
 	hash_map_t *data_user_designate_slot;
 	hash_map_t *voice_user_designate_slot;
 
-}chc_admin_t;
+}task_admin_t;
 
-extern chc_admin_t *chc_admin_slot1_gp;
-extern chc_admin_t *chc_admin_slot2_gp;
-chc_admin_t *create_chc_admin();
-void destroy_chc_admin(chc_admin_t *admin);
-void add_task(chc_admin_t *admin,task_t *task,uint8_t flag);
-int get_task(chc_admin_t *admin,uint8_t flag,uint16_t slot_num,task_t **task);
+extern task_admin_t *task_admin_slot1_gp;
+extern task_admin_t *task_admin_slot2_gp;
+
+task_admin_t *create_task_admin();
+void destroy_task_admin(task_admin_t *admin);
+void add_task(task_admin_t *admin,task_t *task,uint8_t flag);
+int get_task(task_admin_t *admin,uint8_t flag,uint16_t slot_num,task_t *task);
 
 #endif

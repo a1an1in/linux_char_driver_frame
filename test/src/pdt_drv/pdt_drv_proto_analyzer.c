@@ -1,8 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <ctype.h>
+#include <math.h>
 #include "libdbg/debug.h"
 #include "liballoc/allocator.h"
 #include "libproto_analyzer/protocol_format_set.h"
 #include "libproto_analyzer/protocol_analyzer.h"
 #include "pdt_drv_proto_format.h"
+
+debugger_t *debugger_gp;
+allocator_t *allocator;
 
 int test_pdt_proto_3008(protocol_format_set_t *pfs_p,
 		allocator_t *allocator)
@@ -478,7 +488,6 @@ void test_pdt_proto_3010(protocol_format_set_t *pfs_p,
 	pdt_drv_proto_parse_3010(pfs_p, allocator,proto_buffer,os);
 }
 
-
 int test_pdt_drv_proto(protocol_format_set_t *pfs_p, allocator_t *allocator)
 {
 	/*
@@ -496,7 +505,6 @@ int test_pdt_proto_analyzer()
 {
 	protocol_format_set_t *pfs_p;
 	uint32_t ret = 0;
-	allocator_t *allocator;
 
 	allocator = allocator_creator(ALLOCATOR_TYPE_SYS_MALLOC,0);
 
